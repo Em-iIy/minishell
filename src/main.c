@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/07/13 17:40:37 by gwinnink         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,6 +22,11 @@
 
 int exit_status = 0;
 
+static void check_exit(void)
+{
+	system("leaks --quiet minishell");
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
@@ -19,9 +36,12 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
+	atexit(check_exit);
 	while (1)
 	{
-		line = readline(">");
+		line = readline("minishell>");
+		if (!line)
+			return (0);
 		if (line[0] == '\0')
 			continue ;
 		if (!ft_strncmp(line, "exit", 5))
@@ -37,9 +57,10 @@ int	main(int argc, char **argv, char **envp)
 			waitpid(child, &status, 0);
 			if (WIFEXITED(status))
 				exit_status = WEXITSTATUS(status);
-			printf("exit status = %d\n", exit_status);
+			// printf("exit status = %d\n", exit_status);
 		}
-		printf("%s\nargc = %d\n", line, count_split_cmd(line));
+		ft_free_all(cmd.cmd_args);
+		// printf("%s\nargc = %d\n", line, count_split_cmd(line));
 		add_history(line);
 		free(line);
 	}

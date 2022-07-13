@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     printf("argc = %d\n", argc);
     while (i < argc)
     {
-        printf("%d = %s\n", i, argv[i]);
+        printf("%d = -%s-\n", i, argv[i]);
         i++;
     }
 }

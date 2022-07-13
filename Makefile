@@ -24,7 +24,7 @@ OBJS = $(FILES_OBJS:%=$(DIR_OBJS)%)
 
 # ----------------------------------------Flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 INC = -lreadline -Iinc -I$(DIR_LIBFT)
 
 # ----------------------------------------Libraries

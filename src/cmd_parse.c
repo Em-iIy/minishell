@@ -1,34 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_parse.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/13 15:12:00 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/07/13 17:43:06 by gwinnink         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "libft.h"
 #include "minishell.h"
 #include <stdbool.h>
+#include <stdio.h>
+
+// checks if the char c is a character that should be split on
+bool	is_split(char c)
+{
+	if (c == '\'' || c == '\"' || c == ' ')
+		return (true);
+	return (false);
+}
 
 int	count_split_cmd(char *line)
 {
-	int	count;
-	int	i;
+	char	*temp;
+	int		count;
+	int		i;
 
 	i = 0;
 	count = 0;
-	while (line[i])
+	while (*line)
 	{
-		if (line[i] == 39)
+		if (is_split(*line))
 		{
-			i++;
-			if (line[i] != 39)
-			{
-				while (line[i] != 39 && line[i])
-					i++;
-				if (!line[i])
-					return (-1);
-				count++;
-			}
-			else
-				i++;
-		}
-		else if (line[i] != ' ' && (line[i + 1] == ' ' || line[i + 1] == 0))
+			temp = ft_strchr(line, *line);
+			if (!temp)
+				return (0);
+			if (!*temp && *line != ' ')
+				return (0); // in case of unclosed qoute
+			else if (temp[1] == *line)
+				temp = ft_strchr(temp + 2, *line);
+			line = temp + 1;
 			count++;
-		i++;
+		}
 	}
 	return (count);
 }
@@ -52,10 +69,10 @@ int	count_split_cmd(char *line)
 // 	}
 // }
 
-static char *check_cmd(char *cmd, char **path)
+static char	*check_cmd(char *cmd, char **path)
 {
-    char	*ret;
-    char	*temp;
+	char	*ret;
+	char	*temp;
 	int		i;
 
 	i = 0;
@@ -65,7 +82,7 @@ static char *check_cmd(char *cmd, char **path)
 		return (ft_strdup(cmd));
 	while (path[i])
 	{
-		temp  = ft_strjoin(path[i], "/");
+		temp = ft_strjoin(path[i], "/");
 		ret = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(ret, X_OK) == 0)
@@ -76,24 +93,26 @@ static char *check_cmd(char *cmd, char **path)
 		free(ret);
 		i++;
 	}
+	ft_free_all(path);
 	return (NULL);
 }
 
-t_cmd   cmd_parse(char *line, char **envp)
+t_cmd	cmd_parse(char *line, char **envp)
 {
-    t_cmd   cmd;
-    int     i;
+	t_cmd	cmd;
+	int		i;
 
-    i = 0;
-    cmd.cmd_args = ft_split(line, ' ');
-    while (envp[i])
-    {
-        if (!ft_strncmp(envp[i], "PATH=", 5))
-        {
-            cmd.cmd = check_cmd(cmd.cmd_args[0], ft_split(envp[i], ':'));
+	i = 0;
+	printf("minishell argc = %d\n", count_split_cmd(line));
+	cmd.cmd_args = ft_split(line, ' ');
+	while (envp[i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+		{
+			cmd.cmd = check_cmd(cmd.cmd_args[0], ft_split(envp[i], ':'));
 			break ;
-        }
+		}
 		i++;
-    }
+	}
 	return (cmd);
 }
