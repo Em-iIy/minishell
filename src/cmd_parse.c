@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:12:00 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/07/13 17:43:06 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/07/21 15:27:00 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	count_split_cmd(char *line)
 	{
 		if (is_split(*line))
 		{
-			temp = ft_strchr(line, *line);
+			temp = ft_strchr(line + 1, *line);
 			if (!temp)
 				return (0);
 			if (!*temp && *line != ' ')
