@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:34:38 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/08 14:14:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:16:34 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,6 @@ int	tok_iden(char *c)
 	else if (c[0] == '$')
 		return (EXPAND);
 	return (DEF);
-}
-
-void	tok_print(t_token *token)
-{
-	if (token)
-	{
-		printf("token address:\t%p\ntoken->content:\t%s\ntoken->iden:\t%d\ntoken->next:\t%p\ntoken->prev:\t%p\n", token, token->content, token->iden, token->next, token->prev);
-		printf("-------------------------------------------\n");
-	}
-	else
-		printf("NULL\n");
-}
-
-void	print_list_tokens(t_token *head)
-{
-	while (head)
-	{
-		tok_print(head);
-		head = head->next;
-	}
 }
 
 t_token	*tok_new(int iden)

@@ -7,6 +7,7 @@ FILES_SRCS =	main.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
+				lexer_token_print.c \
 
 
 FILES_OBJS = $(FILES_SRCS:.c=.o)
@@ -64,6 +65,7 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
+	make -C $(DIR_LIBFT) fclean
 	rm -f $(NAME)
 
 re: fclean all
