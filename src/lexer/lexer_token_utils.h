@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer_token_utils.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 15:20:46 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/06 17:43:42 by gwinnink         ###   ########.fr       */
+/*   Created: 2022/09/07 14:23:30 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/09/08 14:13:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef LEXER_TOKEN_UTILS_H
+# define LEXER_TOKEN_UTILS_H
 
-typedef struct s_cmd
-{
-	char	*cmd;
-	char	**cmd_args;
-}	t_cmd;
+# include "lexer.h"
 
 //----------------------------------------Prototypes
-t_cmd	cmd_parse(char *line, char **envp);
-int		count_split_cmd(char *line);
-
+int		tok_iden(char *c);
+t_token	*tok_new(int iden);
+t_token	*tok_last(t_token *token);
+void	tok_add_back(t_token **token, t_token *new);
+void	tok_print(t_token *token);
+void	print_list_tokens(t_token *head);
 #endif

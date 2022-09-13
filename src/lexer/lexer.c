@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 15:20:46 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/06 17:43:42 by gwinnink         ###   ########.fr       */
+/*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/09/08 15:15:38 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
+#include "lexer_token_utils.h"
+#include "libft.h"
 
-typedef struct s_cmd
+t_token	*lexer(char *line)
 {
-	char	*cmd;
-	char	**cmd_args;
-}	t_cmd;
+	t_token	*head;
 
-//----------------------------------------Prototypes
-t_cmd	cmd_parse(char *line, char **envp);
-int		count_split_cmd(char *line);
-
-#endif
+	head = NULL;
+	while (*line)
+	{
+		while (ft_isspace(*line))
+			line++;
+		line = create_next_token(&head, line);
+	}
+	print_list_tokens(head);
+	return (head);
+}

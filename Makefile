@@ -4,6 +4,9 @@ NAME = minishell
 # ----------------------------------------FILES
 FILES_SRCS =	main.c \
 				cmd_parse.c \
+				lexer.c \
+				lexer_token.c \
+				lexer_token_utils.c \
 
 
 FILES_OBJS = $(FILES_SRCS:.c=.o)
@@ -14,6 +17,7 @@ DIR_OBJS = ./obj/
 DIR_LIBFT = ./src/libft
 
 vpath %.c $(DIR_SRCS) $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)/lexer/ $(DIR_OBJS)
 
 
 # ----------------------------------------Sources

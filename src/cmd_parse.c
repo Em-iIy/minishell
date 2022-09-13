@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:12:00 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/07/21 15:27:00 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:42:25 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,12 @@ int	count_split_cmd(char *line)
 				return (0);
 			if (!*temp && *line != ' ')
 				return (0); // in case of unclosed qoute
-			else if (temp[1] == *line)
-				temp = ft_strchr(temp + 2, *line);
+			// else if (temp[1] == *line)
+			// 	temp = ft_strchr(temp + 2, *line);
 			line = temp + 1;
 			count++;
 		}
+		line++;
 	}
 	return (count);
 }
