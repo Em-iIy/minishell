@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:45:03 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/02/22 17:59:45 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:13:47 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_isalpha(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+int		ft_isspace(int c);
 void	*ft_memset(void *b, int c, size_t len);
 size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *str);
