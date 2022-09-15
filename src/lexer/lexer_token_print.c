@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:28:47 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/13 16:27:09 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/14 13:40:08 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	lexer_token_print(t_token *token)
 	printf("Tokens:\n--------------------------------------------------------------\nContent:\t");
 	while (temp)
 	{
-		printf("%s | ", temp->content);
+		printf("`%s` | ", temp->content);
 		temp = temp->next;
 	}
 	printf("\n");
@@ -32,7 +32,37 @@ void	lexer_token_print(t_token *token)
 	printf("iden:\t\t");
 	while (temp)
 	{
-		printf("%d", temp->iden);
+		printf("`%d`", temp->iden);
+		i = ft_strlen(temp->content) - 1;
+		while (i > 0)
+		{
+			printf(" ");
+			i--;
+		}
+		printf(" | ");
+		temp = temp->next;
+	}
+	printf("\n");
+	temp = token;
+	printf("start:\t\t");
+	while (temp)
+	{
+		printf("`%d`", temp->start_pos);
+		i = ft_strlen(temp->content) - 1;
+		while (i > 0)
+		{
+			printf(" ");
+			i--;
+		}
+		printf(" | ");
+		temp = temp->next;
+	}
+	printf("\n");
+	temp = token;
+	printf("end:\t\t");
+	while (temp)
+	{
+		printf("`%d`", temp->end_pos);
 		i = ft_strlen(temp->content) - 1;
 		while (i > 0)
 		{

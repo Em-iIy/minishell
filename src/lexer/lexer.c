@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/13 14:55:23 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:26:03 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 t_token	*lexer(char *line)
 {
-	t_token	*head;
+	t_lexer	*lex_head;
+	int		i;
 
-	head = NULL;
-	while (*line)
-	{
-		while (ft_isspace(*line))
-			line++;
-		line = create_next_token(&head, line);
-	}
-	lexer_token_print(head);
-	return (head);
+	lex_head->head = NULL;
+	lex_head->line = line;
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	while (line[i])
+		i = create_next_token(&lex_head, i);
+	lexer_token_print(lex_head->head);
+	return (lex_head->head);
 }

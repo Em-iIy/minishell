@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:34:38 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/13 15:16:34 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/15 14:15:07 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	tok_iden(char *c)
 {
 	if (ft_isspace(c[0]))
-		return (0);
+		return (DEF);
 	else if (c[0] == '>')
 	{
 		if (c[1] == '>')

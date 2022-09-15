@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:20:20 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/08 14:09:31 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/15 15:01:56 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,27 @@ enum e_iden
 };
 
 //----------------------------------------Structs
+
 typedef struct s_token
 {
 	int				iden;
+	int				end_pos;
+	int				start_pos;
 	char			*content;
 	struct s_token	*next;	
 	struct s_token	*prev;	
 }	t_token;
 
+typedef struct s_lexer
+{
+	t_token			*head;
+	char			*line;
+	int				quote;
+	int				dquote;
+}	t_lexer;
+
 //----------------------------------------Prototypes
 t_token	*lexer(char *line);
-char	*create_next_token(t_token **token, char *line);
+int		create_next_token(t_lexer **lexer, int pos);
 
 #endif
