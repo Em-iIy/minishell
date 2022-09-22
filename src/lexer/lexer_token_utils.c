@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:34:38 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/15 14:15:07 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:50:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 
 int	tok_iden(char *c)
 {
-	if (ft_isspace(c[0]))
-		return (DEF);
+	if (c[0] == '\0')
+		return (-1);
+	else if (ft_isspace(c[0]))
+		return (0);
 	else if (c[0] == '>')
 	{
 		if (c[1] == '>')
@@ -54,6 +56,16 @@ t_token	*tok_new(int iden)
 	ret->next = NULL;
 	ret->prev = NULL;
 	ret->iden = iden;
+	return (ret);
+}
+
+int	tok_free(t_token **token)
+{
+	int	ret;
+
+	ret = (*token)->end_pos;
+	free((*token)->content);
+	free(*token);
 	return (ret);
 }
 
