@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/22 13:10:12 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:44:04 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft.h"
 #include "minishell.h"
 #include "lexer.h"
+#include "parser.h"
 
 static void	check_exit(void)
 {
@@ -24,7 +25,9 @@ static void	check_exit(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
+	char		*line;
+	t_token		*lxr;
+	t_parser	*prsr;
 
 	atexit(check_exit);
 	while (1)
@@ -39,7 +42,8 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			exit(0);
 		}
-		lexer(line); // need to write free function for token list!!!!!!!!!!
+		lxr = lexer(line); // need to write free function for token list!!!!!!!!!!
+		prsr = parser(&lxr);
 		add_history(line);
 		free(line);
 	}
