@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:44:41 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/02/22 17:49:05 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:37:04 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strmapi(const char	*s, char (*f)(unsigned int, char))
 		return (0);
 	ret = (char *)malloc(ft_strlen(s) + 1);
 	if (!ret)
-		return (NULL);
+		exit(-1);
 	while (s[i])
 	{
 		ret[i] = f(i, s[i]);

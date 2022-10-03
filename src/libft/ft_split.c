@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:44:20 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/02/22 17:45:29 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:35:52 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_split(const char *s, char c)
 	str_count = ft_str_count(s, c);
 	ret = (char **)malloc((str_count + 1) * sizeof(char *));
 	if (!ret)
-		return (NULL);
+		exit(-1);
 	while (words < str_count)
 	{
 		i = 0;

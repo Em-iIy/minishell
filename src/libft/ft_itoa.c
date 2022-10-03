@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:43:51 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/02/22 17:39:28 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:35:06 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char	*ft_itoa(int n)
 	else
 		digits = ft_digits(n);
 	ret = (char *)malloc((digits + 1) * sizeof(char));
-	if (ret == 0x0)
-		return (ret);
+	if (!ret)
+		exit(-1);
 	if (n == INT_MIN)
 	{
 		ft_strlcpy(ret, "-2147483648", 12);

@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 13:43:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/02/22 18:00:51 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:34:49 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(unsigned int count, size_t size)
 
 	ret = (void *)malloc(count * size);
 	if (!ret)
-		return (NULL);
+		exit(-1);
 	i = 0;
 	while (i < count * size)
 	{
