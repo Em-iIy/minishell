@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:22:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:44:38 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:08:34 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,22 @@ static void	fill_token(t_lexer **lexer, t_token **token,
 	(*token)->end_pos = start_pos + n;
 }
 
+/*
+This one's just here because create_next_token() was getting too long
+*/
+static void	spec_char_token(t_lexer **lexer, t_token **new, int pos)
+{
+	if ((*new)->iden == DQUOTE)
+		(*lexer)->dquote *= -1;
+	else if ((*new)->iden == QUOTE)
+		(*lexer)->quote *= -1;
+	if ((*new)->iden == GREATGREAT || (*new)->iden == LESSLESS)
+		fill_token(lexer, new, pos, 2);
+	else
+		fill_token(lexer, new, pos, 1);
+}
+
+
 int	create_next_token(t_lexer **lexer, int pos)
 {
 	t_token	*new;
@@ -78,17 +94,9 @@ int	create_next_token(t_lexer **lexer, int pos)
 
 	i = 0;
 	new = tok_new(tok_iden(&(*lexer)->line[pos + i]));
-	if (new->iden != DEF && new->iden != 0)
-	{
-		if (new->iden == DQUOTE)
-			(*lexer)->dquote *= -1;
-		else if (new->iden == QUOTE)
-			(*lexer)->quote *= -1;
-		if (new->iden == GREATGREAT || new->iden == LESSLESS)
-			fill_token(lexer, &new, pos, 2);
-		else
-			fill_token(lexer, &new, pos, 1);
-	}
+	if ((new->iden != DEF && new->iden != 0 && (*lexer)->quote == -1) || \
+			(new->iden == QUOTE))
+		spec_char_token(lexer, &new, pos);
 	else
 	{
 		i = find_next_token(*lexer, i + pos) - pos;
