@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/21 16:57:37 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 13:53:13 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_lexer	*init_lexer(char *line)
 	return (ret);
 }
 
-t_token	*lexer(char *line)
+t_lexer	*lexer(char *line)
 {
 	t_lexer	*lex_head;
 	int		i;
@@ -40,5 +40,5 @@ t_token	*lexer(char *line)
 	while (line[i])
 		i = create_next_token(&lex_head, i);
 	lexer_token_print(lex_head->head);
-	return (lex_head->head);
+	return (lex_head);
 }

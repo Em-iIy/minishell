@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:22:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/21 15:44:27 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:44:38 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ static void	fill_token(t_lexer **lexer, t_token **token,
 		(*token)->content = ft_strtrim(temp, "\t\n\v\f\r ");
 		if (*(*token)->content == '\0')
 		{
-			free(temp);
 			(*token)->iden = -2;
 		}
+		free(temp);
 	}
 	else
 		(*token)->content = temp;
@@ -99,7 +99,7 @@ int	create_next_token(t_lexer **lexer, int pos)
 	if (new->iden == -2)
 	{
 		i = new->end_pos;
-		free(new);
+		tok_free(&new);
 		return (i);
 	}
 	tok_add_back(&(*lexer)->head, new);

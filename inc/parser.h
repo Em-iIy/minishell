@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/09/22 14:45:52 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:45:47 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //----------------------------------------Includes
 # include "lexer.h"
+# include <stdbool.h>
 
 //----------------------------------------Enums
 //----------------------------------------Structs
@@ -25,7 +26,7 @@ typedef struct s_parser
 	char	*limiter; // take input until limiter
 	char	*in; // input file
 	char	*out; // output file
-	int		append; // weither to overwrite or append output
+	bool	append; // weither to overwrite or append output
 }	t_parser;
 
 //----------------------------------------Prototypes
