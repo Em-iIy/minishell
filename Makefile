@@ -8,6 +8,7 @@ FILES_SRCS =	main.c \
 				lexer_token.c \
 				lexer_token_utils.c \
 				lexer_token_print.c \
+				free_lexer.c \
 				parser.c \
 				parser_utils.c \
 
@@ -32,7 +33,7 @@ OBJS = $(FILES_OBJS:%=$(DIR_OBJS)%)
 # ----------------------------------------Flags
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-INC = -lreadline -Iinc -I$(DIR_LIBFT)
+INC =  -Iinc -I$(DIR_LIBFT)
 
 # ----------------------------------------Libraries
 LIBFT = $(DIR_LIBFT)/libft.a
@@ -42,15 +43,14 @@ ifdef WITH_ADDRESS
 CFLAGS += -g -fsanitize=address
 endif
 
-
 # ----------------------------------------Making
 all: $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(INC) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(HOME)/.brew/opt/readline/lib -lreadline $(INC) $(LIBFT)
 
 $(DIR_OBJS)%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@  -I $(HOME)/.brew/opt/readline/include $(INC)
 
 $(DIR_OBJS):
 	mkdir -p $@
