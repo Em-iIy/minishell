@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 14:45:47 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:12:27 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct s_parser
 }	t_parser;
 
 //----------------------------------------Prototypes
-t_parser	*parser(t_token **token);
+t_parser	*parser(t_lexer **lxr);
 
 #endif

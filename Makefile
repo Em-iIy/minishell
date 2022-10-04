@@ -7,6 +7,7 @@ FILES_SRCS =	main.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
+				lexer_token_del.c \
 				lexer_token_print.c \
 				free_lexer.c \
 				parser.c \
@@ -20,8 +21,8 @@ DIR_OBJS = ./obj/
 DIR_LIBFT = ./src/libft
 
 vpath %.c $(DIR_SRCS) $(DIR_OBJS)
-vpath %.c $(DIR_SRCS)/lexer/ $(DIR_OBJS)
-vpath %.c $(DIR_SRCS)/parser/ $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)lexer/ $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)parser/ $(DIR_OBJS)
 
 
 # ----------------------------------------Sources

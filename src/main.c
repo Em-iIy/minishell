@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:25:36 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:52:47 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	main(int argc, char **argv, char **envp)
 			exit(0);
 		}
 		lxr = lexer(line); // need to write free function for token list!!!!!!!!!!
-		free_lexer(&lxr);
 		// prsr = parser(&lxr);
-		// add_history(line);
+		free_lexer(&lxr);
+		add_history(line);
 		free(line);
 	}
 }
