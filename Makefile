@@ -3,7 +3,6 @@ NAME = minishell
 
 # ----------------------------------------FILES
 FILES_SRCS =	main.c \
-				cmd_parse.c \
 				lexer.c \
 				lexer_token.c \
 				lexer_token_utils.c \
@@ -12,6 +11,8 @@ FILES_SRCS =	main.c \
 				free_lexer.c \
 				parser.c \
 				parser_utils.c \
+				environment.c \
+				environment_utils.c \
 
 FILES_OBJS = $(FILES_SRCS:.c=.o)
 
@@ -23,6 +24,7 @@ DIR_LIBFT = ./src/libft
 vpath %.c $(DIR_SRCS) $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)lexer/ $(DIR_OBJS)
 vpath %.c $(DIR_SRCS)parser/ $(DIR_OBJS)
+vpath %.c $(DIR_SRCS)environment/ $(DIR_OBJS)
 
 
 # ----------------------------------------Sources

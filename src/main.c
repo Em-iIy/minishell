@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/04 14:52:47 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:31:49 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "minishell.h"
 #include "lexer.h"
 #include "parser.h"
+#include "environment.h"
 
 static void	check_exit(void)
 {
@@ -27,9 +28,21 @@ static void	check_exit(void)
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
+	char		**new_envp;
 	t_lexer		*lxr;
 	t_parser	*prsr;
+	t_env		*env;
+	int			i;
 
+	i = 0;
+	env = env_cpy(envp);
+	new_envp = make_envp(env);
+	while (envp[i])
+	{
+		printf("old:%s\n", envp[i]);
+		printf("new:%s\n", new_envp[i]);
+		i++;
+	}
 	atexit(check_exit);
 	while (1)
 	{
