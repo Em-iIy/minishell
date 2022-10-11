@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 15:31:50 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 15:36:30 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/11 12:45:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ void	*ft_free_all(char **arr)
 		i++;
 	}
 	free(arr);
-	exit(-1);
 	return (NULL);
 }
