@@ -12,6 +12,9 @@ FILES_SRCS =	main.c \
 				parser.c \
 				parser_utils.c \
 				environment.c \
+				environment_get.c \
+				environment_add.c \
+				environment_unset.c \
 				environment_utils.c \
 
 FILES_OBJS = $(FILES_SRCS:.c=.o)

@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   environment_utils.h                                :+:      :+:    :+:   */
+/*   environment_get.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 15:25:55 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 12:19:00 by gwinnink         ###   ########.fr       */
+/*   Created: 2022/10/11 11:00:18 by gwinnink          #+#    #+#             */
+/*   Updated: 2022/10/11 11:49:25 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIRONMENT_UTILS_H
-# define ENVIRONMENT_UTILS_H
+#include "libft.h"
+#include "environment_utils.h"
+#include "environment.h"
 
-# include "environment.h"
+t_env	*env_chr(t_env *env, char *key)
+{
+	if (!env || !key)
+		return (NULL);
+	while (env)
+	{
+		if (!ft_strncmp(env->key, key, ft_strlen(key) + 1))
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
 
-//----------------------------------------Prototypes
-t_env	*env_new(char *str);
-char	*env_to_str(t_env *env);
-void	env_add_front(t_env **env, t_env *new);
-void	env_free(t_env *env);
-void	env_del(t_env **env, t_env *del);
+char	*get_env(t_env *env, char *key)
+{
+	t_env	*ret;
 
-#endif
+	ret = env_chr(env, key);
+	if (!ret)
+		return (NULL);
+	return (ret->val);
+}

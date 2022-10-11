@@ -6,11 +6,12 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/06 16:31:49 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/11 13:13:10 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -37,12 +38,36 @@ int	main(int argc, char **argv, char **envp)
 	i = 0;
 	env = env_cpy(envp);
 	new_envp = make_envp(env);
-	while (envp[i])
+	while (new_envp[i])
 	{
-		printf("old:%s\n", envp[i]);
-		printf("new:%s\n", new_envp[i]);
+		printf("--%s\n", new_envp[i]);
 		i++;
 	}
+	if (argc == 2)
+	{
+		printf("getenv->%s=\"%s\"\n", argv[1], getenv(argv[1]));
+		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
+	}
+	else if (argc == 3)
+	{
+		add_env(&env, argv[1], argv[2]);
+		ft_free_all(new_envp);
+		new_envp = make_envp(env);
+		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
+	}
+	else if (argc == 4)
+	{
+		unset_env(&env, argv[1]);
+		ft_free_all(new_envp);
+		new_envp = make_envp(env);
+		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
+	}
+	// i = 0;
+	// while (new_envp[i])
+	// {
+	// 	printf("new:%s\n", new_envp[i]);
+	// 	i++;
+	// }
 	atexit(check_exit);
 	while (1)
 	{
