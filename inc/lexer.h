@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:20:20 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 13:18:15 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:15:56 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 //----------------------------------------Enums
 enum e_iden
 {
-	GREAT = 1,
+	TERM = -1,
+	ISSPACE,
+	GREAT,
 	GREATGREAT,
 	LESS,
 	LESSLESS,
@@ -34,6 +36,7 @@ typedef struct s_token
 	int				iden;
 	int				end_pos;
 	int				start_pos;
+	int				str_end;
 	char			*content;
 	struct s_token	*next;	
 	struct s_token	*prev;	

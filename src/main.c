@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/11 13:13:10 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:31:00 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,9 @@ int	main(int argc, char **argv, char **envp)
 	t_lexer		*lxr;
 	t_parser	*prsr;
 	t_env		*env;
-	int			i;
 
-	i = 0;
 	env = env_cpy(envp);
 	new_envp = make_envp(env);
-	while (new_envp[i])
-	{
-		printf("--%s\n", new_envp[i]);
-		i++;
-	}
-	if (argc == 2)
-	{
-		printf("getenv->%s=\"%s\"\n", argv[1], getenv(argv[1]));
-		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
-	}
-	else if (argc == 3)
-	{
-		add_env(&env, argv[1], argv[2]);
-		ft_free_all(new_envp);
-		new_envp = make_envp(env);
-		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
-	}
-	else if (argc == 4)
-	{
-		unset_env(&env, argv[1]);
-		ft_free_all(new_envp);
-		new_envp = make_envp(env);
-		printf("get_env->%s=\"%s\"\n", argv[1], get_env(env, argv[1]));
-	}
-	// i = 0;
-	// while (new_envp[i])
-	// {
-	// 	printf("new:%s\n", new_envp[i]);
-	// 	i++;
-	// }
 	atexit(check_exit);
 	while (1)
 	{
@@ -81,8 +49,8 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			exit(0);
 		}
-		lxr = lexer(line); // need to write free function for token list!!!!!!!!!!
-		// prsr = parser(&lxr);
+		lxr = lexer(line);
+		// prsr = parser(env, &lxr);
 		free_lexer(&lxr);
 		add_history(line);
 		free(line);

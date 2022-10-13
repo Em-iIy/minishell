@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:28:47 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/04 14:44:27 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/12 15:37:03 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void	lexer_token_print(t_token *token)
 	while (temp)
 	{
 		printf("`%s` | ", temp->content);
+		temp = temp->next;
+	}
+	printf("\n");
+	temp = token;
+	printf("str_end:\t");
+	while (temp)
+	{
+		printf("`%d`", temp->str_end);
+		i = ft_strlen(temp->content) - 1;
+		while (i > 0)
+		{
+			printf(" ");
+			i--;
+		}
+		printf(" | ");
 		temp = temp->next;
 	}
 	printf("\n");

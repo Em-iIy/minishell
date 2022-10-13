@@ -6,13 +6,14 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/03 13:53:13 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/12 13:42:38 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "lexer_token_utils.h"
 #include "libft.h"
+#include "debug.h"
 
 static t_lexer	*init_lexer(char *line)
 {
@@ -38,7 +39,9 @@ t_lexer	*lexer(char *line)
 	while (ft_isspace(line[i]))
 		i++;
 	while (line[i])
+	{
 		i = create_next_token(&lex_head, i);
+	}
 	lexer_token_print(lex_head->head);
 	return (lex_head);
 }
