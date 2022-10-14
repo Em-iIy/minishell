@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:01:02 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/04 14:55:04 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:05:13 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "lexer_token_utils.h"
 #include "lexer.h"
 
-void	free_lexer(t_lexer **lexer)
+void	free_lexer(t_lexer **lxr)
 {
-	while ((*lexer)->head)
-		lexer_token_del(lexer, (*lexer)->head);
-	free(*lexer);
+	while ((*lxr)->head)
+		lexer_token_del(lxr, (*lxr)->head);
+	free(*lxr);
 }

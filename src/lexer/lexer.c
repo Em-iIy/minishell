@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/12 13:42:38 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:54:25 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,24 @@ static t_lexer	*init_lexer(char *line)
 
 t_lexer	*lexer(char *line)
 {
-	t_lexer	*lex_head;
+	t_lexer	*lxr;
 	int		i;
 
-	lex_head = init_lexer(line);
+	lxr = init_lexer(line);
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
 	while (line[i])
 	{
-		i = create_next_token(&lex_head, i);
+		i = create_next_token(&lxr, i);
 	}
-	lexer_token_print(lex_head->head);
-	return (lex_head);
+	lexer_token_print(lxr->head);
+	if (lxr->dquote == 1 || lxr->quote == 1)
+	{
+		printf("Minishell: syntax error unclosed token\n");
+		free(lxr->line);
+		free_lexer(&lxr);
+		return (NULL);
+	}
+	return (lxr);
 }

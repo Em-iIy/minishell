@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:20:20 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/12 15:15:56 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:14:04 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_lexer
 
 //----------------------------------------Prototypes
 t_lexer	*lexer(char *line);
-int		create_next_token(t_lexer **lexer, int pos);
-void	free_lexer(t_lexer **lexer);
+int		create_next_token(t_lexer **lxr, int pos);
+void	free_lexer(t_lexer **lxr);
 
 #endif
