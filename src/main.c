@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/14 10:54:33 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:15:37 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 			return (0);
 		if (line[0] == '\0')
 			continue ;
+		add_history(line);
 		if (!ft_strncmp(line, "exit", 5))
 		{
 			printf("exit\n");
@@ -54,7 +55,6 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		free_lexer(&lxr);
-		add_history(line);
 		free(line);
 	}
 }
