@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/12 10:51:25 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 13:51:14 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_file
 {
 	struct s_file	*next;
 	char			*file_name;
+	int				fd;
 	bool			io;
 	bool			alt;
 }	t_file;
@@ -37,12 +38,8 @@ typedef struct s_cmd
 
 typedef struct s_parser
 {
-	t_cmd	*cmds; // array of commands ready for execve
+	t_cmd	*cmds; // list of commands ready for execve
 	int		count; // amount of commands in cmds
-	char	*limiter; // take input until limiter
-	char	*in; // input file
-	char	*out; // output file
-	bool	append; // weither to overwrite or append output
 }	t_parser;
 
 //----------------------------------------Prototypes
