@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:22:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/14 11:14:51 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 16:21:05 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	fill_token(t_lexer **lxr, t_token **token,
 	char	*temp;
 
 	temp = ft_substr((*lxr)->line, start_pos, n);
-	// DEBUG(temp, (*lxr)->dquote, (*lexer)->quote);
 	if ((*lxr)->dquote == -1 && (*lxr)->quote == -1)
 	{
 		(*token)->content = ft_strtrim(temp, "\t\n\v\f\r ");
@@ -94,10 +93,10 @@ static void	check_end(t_lexer *lexer, t_token *token)
 {
 	char	end;
 
+	end = lexer->line[token->end_pos];
 	if (token->iden == DEF)
-		end = lexer->line[token->end_pos - 1];
-	else
-		end = lexer->line[token->end_pos];
+		if (tok_iden(&lexer->line[token->end_pos - 1]) != DEF)
+			end = lexer->line[token->end_pos - 1];
 	if (!ft_isspace(end) && end != '\0')
 		return ;
 	if (lexer->dquote == 1 || lexer->quote == 1)
