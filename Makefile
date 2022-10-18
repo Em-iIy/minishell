@@ -11,8 +11,14 @@ FILES_SRCS =	main.c \
 				free_lexer.c \
 				parser.c \
 				parser_utils.c \
+				parse_io.c \
+				parse_io_utils.c \
+				parse_cmd.c \
+				parse_cmd_utils.c \
+				parse_str.c \
 				parse_quote.c \
 				parse_dquote.c \
+				parse_expand.c \
 				environment.c \
 				environment_get.c \
 				environment_add.c \
