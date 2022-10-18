@@ -6,14 +6,13 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:37:28 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 15:33:21 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 21:02:12 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 #include "parser.h"
-#include "lexer.h"
 #include "parser_utils.h"
 
 int	check_valid_str_iden(int iden, char *str)
@@ -34,12 +33,14 @@ char	*append_token(t_env *env, char *str, t_token **token)
 	char	*ret;
 	char	*temp;
 
-	if ((*token)->iden == EXPAND && (*token)->next && (*token)->next->iden == DEF)
+	if ((*token)->iden == EXPAND && (*token)->next && \
+	(*token)->next->iden == DEF)
 	{
 			temp = parser_expand(env, (*token)->next->content);
 			(*token) = (*token)->next;
 	}
-	else if ((*token)->iden == EXPAND && (*token)->next && (*token)->next && !str)
+	else if ((*token)->iden == EXPAND && (*token)->next && \
+	(*token)->next && !str)
 		temp = ft_strdup("");
 	else
 		temp = ft_strdup((*token)->content);
@@ -54,7 +55,7 @@ char	*append_token(t_env *env, char *str, t_token **token)
 	return (ret);
 }
 
-char	*parse_str(t_env *env, t_lexer **lxr, t_token **head)
+char	*parse_str(t_env *env, t_token **head)
 {
 	char	*ret;
 	char	*temp_ret;
@@ -66,9 +67,9 @@ char	*parse_str(t_env *env, t_lexer **lxr, t_token **head)
 	while ((*head))
 	{
 		if ((*head)->iden == DQUOTE)
-			temp = parse_dquote(env, lxr, head);
+			temp = parse_dquote(env, head);
 		else if ((*head)->iden == QUOTE)
-			temp = parse_quote(env, lxr, head);
+			temp = parse_quote(env, head);
 		else
 			temp = append_token(env, NULL, head);
 		temp_ret = ft_strjoin(ret, temp);

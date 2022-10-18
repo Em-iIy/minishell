@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:27:03 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 19:43:01 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 21:00:33 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,9 @@ t_parser	*parser(t_env *env, t_lexer **lxr)
 	tok_temp = (*lxr)->head;
 	while (tok_temp && parser->count != -1)
 	{
-		temp = parse_cmd(env, lxr, &tok_temp);
+		temp = parse_cmd(env, &tok_temp);
 		if (!temp || check_cmd(temp, tok_temp) == false)
-		{
 			parser->count = -1;
-			// return (parser);
-		}
 		if (tok_temp)
 			tok_temp = tok_temp->next;
 		parser->count++;

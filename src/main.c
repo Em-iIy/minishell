@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 19:48:56 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:55:03 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int argc, char **argv, char **envp)
 	t_parser	*prsr;
 	t_env		*env;
 
+	(void)argc;
+	(void)argv;
 	env = env_cpy(envp);
 	new_envp = make_envp(env);
 	atexit(check_exit);

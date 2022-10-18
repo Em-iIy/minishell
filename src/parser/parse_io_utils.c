@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 12:38:37 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 13:26:24 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:55:21 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_file	*io_last(t_file *file)
 
 void	io_add_back(t_file **file, t_file *new)
 {
-	t_file	*temp;
-
 	if (!*file)
 		*file = new;
 	else

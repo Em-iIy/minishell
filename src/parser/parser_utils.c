@@ -6,17 +6,12 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:34:14 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 13:51:09 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:46:43 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
-#include "environment.h"
 #include "parser.h"
-
-#include <stdio.h>
-#include <unistd.h>
 
 t_parser	*init_parser(void)
 {

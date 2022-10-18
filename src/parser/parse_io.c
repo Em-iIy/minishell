@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:32:18 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 15:04:42 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:59:16 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_file	*file_init(int iden)
 	return (ret);
 }
 
-t_file	*parse_io(t_env *env, t_lexer **lxr, t_token **head)
+t_file	*parse_io(t_env *env, t_token **head)
 {
 	t_file	*ret;
 	t_token	*temp_head;
@@ -48,7 +48,7 @@ t_file	*parse_io(t_env *env, t_lexer **lxr, t_token **head)
 	else
 	{
 		(*head) = (*head)->next;
-		temp = parse_str(env, lxr, head);
+		temp = parse_str(env, head);
 		if (!temp)
 			return (NULL);
 	}

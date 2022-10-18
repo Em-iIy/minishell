@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:28:47 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/12 15:37:03 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:48:26 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,3 @@ void	lexer_token_print(t_token *token)
 	}
 	printf("\n");
 }
-
-

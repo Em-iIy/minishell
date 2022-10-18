@@ -6,14 +6,14 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:21:16 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/14 10:54:25 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:53:22 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "lexer.h"
 #include "lexer_token_utils.h"
 #include "libft.h"
-#include "debug.h"
 
 static t_lexer	*init_lexer(char *line)
 {

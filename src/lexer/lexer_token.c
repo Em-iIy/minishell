@@ -6,16 +6,13 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:22:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 16:21:05 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:47:58 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer_token_utils.h"
 #include "lexer.h"
 #include "libft.h"
-
-#include "debug.h"
-
 
 /* --find_next_token
 Will loop until it finds then next relevent token
@@ -74,34 +71,45 @@ static void	fill_token(t_lexer **lxr, t_token **token,
 	(*token)->end_pos = start_pos + n;
 }
 
-/*
-This one's just here because create_next_token() was getting too long
-*/
-static void	spec_char_token(t_lexer **lexer, t_token **new, int pos)
-{
-	if ((*new)->iden == DQUOTE)
-		(*lexer)->dquote *= -1;
-	else if ((*new)->iden == QUOTE)
-		(*lexer)->quote *= -1;
-	if ((*new)->iden == GREATGREAT || (*new)->iden == LESSLESS)
-		fill_token(lexer, new, pos, 2);
-	else
-		fill_token(lexer, new, pos, 1);
-}
-
 static void	check_end(t_lexer *lexer, t_token *token)
 {
-	char	end;
+	char	*end;
+	int		end_iden;
 
-	end = lexer->line[token->end_pos];
+	end = &lexer->line[token->end_pos];
 	if (token->iden == DEF)
 		if (tok_iden(&lexer->line[token->end_pos - 1]) != DEF)
-			end = lexer->line[token->end_pos - 1];
-	if (!ft_isspace(end) && end != '\0')
+			end = &lexer->line[token->end_pos - 1];
+	end_iden = tok_iden(end);
+	if (end_iden == EXPAND || end_iden == QUOTE || end_iden == DQUOTE)
 		return ;
 	if (lexer->dquote == 1 || lexer->quote == 1)
 		return ;
 	token->str_end = 1;
+}
+
+/*
+This one's just here because create_next_token() was getting too long
+*/
+static int	spec_char_token(t_lexer **lxr, t_token **new, int pos)
+{
+	if (((*new)->iden != DEF && (*new)->iden != ISSPACE) && \
+	((*lxr)->quote == -1 || ((*new)->iden == QUOTE && \
+	(*lxr)->dquote == -1)) && ((*lxr)->dquote == -1 || \
+	((*new)->iden == EXPAND && (*lxr)->dquote == 1) || \
+	((*new)->iden == DQUOTE && (*lxr)->dquote == 1)))
+	{
+		if ((*new)->iden == DQUOTE)
+			(*lxr)->dquote *= -1;
+		else if ((*new)->iden == QUOTE)
+			(*lxr)->quote *= -1;
+		if ((*new)->iden == GREATGREAT || (*new)->iden == LESSLESS)
+			fill_token(lxr, new, pos, 2);
+		else
+			fill_token(lxr, new, pos, 1);
+		return (1);
+	}
+	return (0);
 }
 
 int	create_next_token(t_lexer **lxr, int pos)
@@ -111,44 +119,7 @@ int	create_next_token(t_lexer **lxr, int pos)
 
 	i = 0;
 	new = tok_new(tok_iden(&(*lxr)->line[pos]));
-	// if
-	// (
-	// 	( // making sure it's a special char
-	// 		new->iden != DEF
-	// 		&&
-	// 		new->iden != ISSPACE
-	// 	)
-	// 	&&
-	// 	( //
-	// 		(*lexer)->quote == -1
-	// 		||
-	// 		(
-	// 			new->iden == QUOTE
-	// 			&&
-	// 			(*lexer)->dquote == -1
-	// 		)
-	// 	)
-	// 	&&
-	// 	(
-	// 		(*lexer)->dquote == -1
-	// 		||
-	// 		(
-	// 			new->iden == EXPAND
-	// 			&&
-	// 			(*lexer)->dquote == 1
-	// 		)
-	// 		||
-	// 		(
-	// 			new->iden == DQUOTE
-	// 			&&
-	// 			(*lexer)->dquote == 1
-	// 		)
-	// 	)
-	// )
-	// if ((new->iden == QUOTE && (*lexer)->dquote == -1) || (new->iden != DEF && new->iden != ISSPACE && (*lexer)->quote == -1))
-	if ((new->iden != DEF && new->iden != ISSPACE) && ((*lxr)->quote == -1 || (new->iden == QUOTE && (*lxr)->dquote == -1)) && ((*lxr)->dquote == -1 || (new->iden == EXPAND && (*lxr)->dquote == 1) || (new->iden == DQUOTE && (*lxr)->dquote == 1)))
-		spec_char_token(lxr, &new, pos);
-	else
+	if (!spec_char_token(lxr, &new, pos))
 	{
 		i = find_next_token(*lxr, i + pos) - pos;
 		fill_token(lxr, &new, pos, i);
