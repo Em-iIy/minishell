@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 17:34:38 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/12 15:16:18 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 11:54:31 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,10 @@ int	tok_free(t_token **token)
 
 t_token	*tok_last(t_token *token)
 {
-	while (token)
-	{
-		if (!token->next)
-			return (token);
+	if (!token)
+		return (NULL);
+	while (token->next)
 		token = token->next;
-	}
 	return (token);
 }
 
