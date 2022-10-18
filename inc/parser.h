@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:16:36 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/18 13:51:14 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:01:19 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ typedef struct s_cmd
 
 typedef struct s_parser
 {
-	t_cmd	*cmds; // list of commands ready for execve
-	int		count; // amount of commands in cmds
+	t_cmd	*cmds;
+	int		count;
 }	t_parser;
 
 //----------------------------------------Prototypes
 t_parser	*parser(t_env *env, t_lexer **lxr);
+void		free_parser(t_parser *prsr);
 
 #endif

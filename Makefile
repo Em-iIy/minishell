@@ -19,6 +19,7 @@ FILES_SRCS =	main.c \
 				parse_quote.c \
 				parse_dquote.c \
 				parse_expand.c \
+				free_parser.c \
 				environment.c \
 				environment_get.c \
 				environment_add.c \
@@ -54,7 +55,7 @@ LIBFT = $(DIR_LIBFT)/libft.a
 
 # ----------------------------------------Debug
 ifdef WITH_ADDRESS
-CFLAGS += -g -fsanitize=address
+CFLAGS += -fsanitize=address
 endif
 
 # ----------------------------------------Making

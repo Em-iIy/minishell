@@ -6,7 +6,7 @@
 /*   By: gwinnink <gwinnink@student.codam.nl>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:20:49 by gwinnink          #+#    #+#             */
-/*   Updated: 2022/10/14 15:15:37 by gwinnink         ###   ########.fr       */
+/*   Updated: 2022/10/18 19:48:56 by gwinnink         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		prsr = parser(env, &lxr);
 		free_lexer(&lxr);
+		free_parser(prsr);
 		free(line);
 	}
 }
